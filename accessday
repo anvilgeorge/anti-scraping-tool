@@ -4,4 +4,4 @@
 datetag=`date -v-$1d "+%d/%b/%Y"`
 tail -n 500000 /var/log/httpd-access.log | grep $datetag \
 | grep -v  xxx.xxx.xxx | grep -v yyy.yyy.yyy \
-| awk '{print $1}' | awk -F'.' '{print $1 "." $2}' | sed s/' '/\\n/g | sort | uniq -c | sort -n
+| awk '{print $1}' | awk -F'.' '{print $1 "." $2 "." $3}' | sed s/' '/\\n/g | sort | uniq -c | sort -n
