@@ -62,7 +62,7 @@ The output reading across is:
 usage: ./registrant2ips registrant   eg. ./registrant2ips badscraper
 
 This will give you the ips associated with the registrant identfied by ip2registrant above. 
-It will also create a file ASbadscraper with their ip addresses
+It will also create a file ASNbadscraper with their ip addresses
 
 You will need perl and p5-Net-CIDR, or its equivalent, to run this script.
 
