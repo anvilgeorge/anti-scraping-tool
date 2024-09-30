@@ -14,7 +14,7 @@ my environment: freebsd 13.2, apache 2.4, pf packet filter, perl and sh shell
 
 The first 3 files are bsd command line shell scripts that are run in order:
 
-1. accessday - This will report the number of requests for each ip address, sorted by number of requests.  The first number reported is the number of requests followed by the first 3 octets of the ip addresses associated with the requests.
+1. accessday - This will report the number of requests for each ip address, sorted by number of requests.  
 2. ip2registrant - This will provide the name of the registrant for the ip address that you would like to ban
 3. registrant2ips - This will give you the other ips associated with the registrant
 4. I then update my packet filtering blocking system with all of the ip addresses associated with the registrant I want to ban. 
@@ -30,7 +30,9 @@ State number of days prior eg
 
 This allows you to go back several days.  
 
-The script will search your http access log and pull all of the access requests for that day and provide the number of accesses for each ip address.  It currently will search the last 500,000 entries of your access log.  You can change this as needed by changing the number in "tail -n 500000"
+The script will search your http access log and pull all of the access requests for that day and provide the number of accesses for each ip address.  The first number reported is the number of requests followed by the first 3 octets of the ip addresses associated with the requests.
+
+It currently will search the last 500,000 entries of your access log.  You can change this as needed by changing the number in "tail -n 500000"
 
 the xxx.xxx.xxx and yyy.yyy.yyy in the script are the first 3 octets of ip addresses you do not want reported, such as your own or a search crawler you do not want to block.  You can delete and add more as needed, for example by adding "| grep -v zzz.zzz.zzz" to the line, before the back slash
 
