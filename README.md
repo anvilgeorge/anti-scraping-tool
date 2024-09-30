@@ -74,6 +74,7 @@ I created /etc/blocked_ips for this purpose.
 I also added the following to pf.conf in the appropriate spots
 
 table <blocked_ips> persist file "/etc/blocked_ips" 
+
 block drop in quick on $ext_if inet from { <blocked_ips> } to any
 
 This assumes you are running the pf packet filter on your system.
