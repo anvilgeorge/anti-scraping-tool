@@ -1,5 +1,3 @@
-#### The code got garbled - I am fixing that. Please return later #####
-
 # anti-scraping-tool
 Tools to prevent web scraping
 
@@ -41,8 +39,9 @@ This will give you the registrant associated with the ip address you would like 
 usage: ./name2ip registrant   eg. ./name2ip badscraper
 
 This will give you the ips associated with the registrant identfied by ip2registrant above. 
+It will also create a file ASbadscraper with their ip addresses
 
-You will need perl and p5-Net-CIDR
+You will need perl and p5-Net-CIDR to run this script
 
 **file: pf.conf**
 You will need to then add those ip addresses to your systems packet filtering.
