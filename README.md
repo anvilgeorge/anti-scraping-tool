@@ -4,7 +4,7 @@
 
 Tools to prevent web scraping
 
-The tools first identify the ip address of the party you would like to ban. ie. an ip address that is making a significant number of requests.  It then provides all of the ip addressess associated with the that party.  Those addresses are then added to the packet filters and blocked.
+The tools first identify the ip address of the party you would like to ban. ie. an ip address that is making a significant number of web requests.  It then provides all of the ip addressess associated with the that party.  Those addresses are then added to the packet filters and blocked.
 
 This is not meant to be a plug and play tool.  You will need to adapt it for your environment.
 
@@ -25,6 +25,7 @@ For the script files you will need to give them execute permission e.g. chmod 70
 State number of days prior eg 
 
 ./accessday 1     - for yesterday 
+
 ./accessday 0     - for today 
 
 This allows you to go back several days.  
@@ -35,7 +36,7 @@ the xxx.xxx.xxx and yyy.yyy.yyy in the script are the first 3 octets of ip addre
 
 accessday-alt is a version of this script which reports using the first 2 octets of ip addresses as some scrapers will use multiple ip addresses under the first 2 octets. 
 
-The script assumes your http access file is located at /var/log/httpd-access.log.  You may need to change that based on your set up.
+The script assumes your http access file is located at /var/log/httpd-access.log.  You may need to change that based on your set up.  Ensure you have read access to this file.
 
 **file: ip2registrant**
 usage: try the following on the command line:
@@ -48,15 +49,22 @@ then try
 
 You will need to get ip2asn-v4.tsv from iptoasn.com and place that file in the same directory as the scripts.  The xxxs are the first 2 or 3 octets of the ip address that you would like to ban that were identified using accessday above. Use the first 3 octets of the ip address and if nothing is reported then use the first 2 octets.
 
-This will give you the registrant associated with the ip address you would like to ban. 
-
+The output reading across is:
+1. start of the ip adress block
+2. end of the ip address block
+3. the asn number for the ip address block
+4. the country
+5. the registrant
+   
 **file: registrant2ips**
 usage: ./registrant2ips registrant   eg. ./registrant2ips badscraper
 
 This will give you the ips associated with the registrant identfied by ip2registrant above. 
 It will also create a file ASbadscraper with their ip addresses
 
-You will need perl and p5-Net-CIDR or its equivalent to run this script
+You will need perl and p5-Net-CIDR, or its equivalent, to run this script.
+
+This script can take some time to run.
 
 **file: pf.conf**
 You will need to then add those ip addresses to your system's packet filtering.
@@ -66,7 +74,6 @@ I created /etc/blocked_ips for this purpose.
 I also added the following to pf.conf in the appropriate spots
 
 table <blocked_ips> persist file "/etc/blocked_ips" 
-
 block drop in quick on $ext_if inet from { <blocked_ips> } to any
 
 This assumes you are running the pf packet filter on your system.
