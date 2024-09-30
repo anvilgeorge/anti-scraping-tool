@@ -33,7 +33,7 @@ The script will search your http access log and pull all of the access requests 
 
 the xxx.xxx.xxx and yyy.yyy.yyy in the script are the first 3 octets of ip addresses you do not want reported, such as your own or a search crawler you do not want to block.  You can delete and add more as needed, for example by adding "| grep -v zzz.zzz.zzz" to the line, before the back slash
 
-I have a version of this script without the '"." $3' as some scrapers will use multiple ip addresses under the first 2 octets. 
+accessday-alt is a version of this script which reports using the first 2 octets of ip addresses as some scrapers will use multiple ip addresses under the first 2 octets. 
 
 The script assumes your http access file is located at /var/log/httpd-access.log.  You may need to change that based on your set up.
 
