@@ -1,0 +1,4 @@
+#!/bin/sh
+grep -i $1 ip2asn-v4.tsv | awk '{print $5}' | grep -f - ip2asn-v4.tsv | awk '{print $1 " - " $2}' | sort -n \
+| perl -MNet::CIDR=range2cidr -lne 'print for range2cidr $_' > ASN$1 
+cat ASN$1
