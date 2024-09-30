@@ -36,7 +36,7 @@ the xxx.xxx.xxx and yyy.yyy.yyy in the script are the first 3 octets of ip addre
 
 accessday-alt is a version of this script which reports using the first 2 octets of ip addresses as some scrapers will use multiple ip addresses under the first 2 octets. 
 
-The script assumes your http access file is located at /var/log/httpd-access.log.  You may need to change that based on your set up.  Ensure you have read access to this file.
+The script assumes your http access log is located at /var/log/httpd-access.log.  You may need to change that based on your set up.  Ensure you have read access to this file.
 
 **file: ip2registrant**
 usage: try the following on the command line:
