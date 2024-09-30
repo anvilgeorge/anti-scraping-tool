@@ -11,16 +11,17 @@ my environment: freebsd 13.2, apache24, pf, perl and sh shell
 
 The first 3 are bsd shell scripts that are run in order:
 
-1. accessday - This will report the number of requests for each ip address, sorted by number of requests
+1. accessday - This will report the number of requests for each ip address, sorted by number of requests.  The first number is the number of requests followed by the first 3 octets of their ip address.
 2. ip2registrant - This will provide the name of the registrant for the ip address of those you would like to ban
-3. registrant2ips - This will give you the ips associated with the registrant
+3. registrant2ips - This will give you the other ips associated with the registrant
 4. I then update my packet filtering blocking file with all of the ip addresses associated with the registrant I want to ban. 
 
 **file: accessday**
-must state number of days prior eg ./accessday 1 - for yesterday ./accessday 0 for today
+State number of days prior eg ./accessday 1 - for yesterday ./accessday 0 for today -  this allows you to back several days.  
 It will search your http access log and pull all of the access requests for that day and provide the number of accesses for each ip address.
+It currently will search the last 500,000 entries of your access log.  You can change this as needed by changing the number in "tail -n 500000"
 
-the xxx.xxx.xxx and yyy.yyy.yyy in the script are the first 3 octets of ip addresses you do not want reported, such as your own or a search crawler.  You can delete and add more as needed.
+the xxx.xxx.xxx and yyy.yyy.yyy in the script are the first 3 octets of ip addresses you do not want reported, such as your own or a search crawler.  You can delete and add more as needed, for example by adding "| grep -v zzz.zzz.zzz" to the line.
 
 I have a version of this script without the '"." $3' as some scrapers will use multiple ip addresses under the first 2 octets. 
 
@@ -29,7 +30,8 @@ The script assumes your http access file is located at /var/log/httpd-access.log
 **file: ip2registrant**
 usage: try the following on the command line:
 1. ./ip2name xxx.xxx.xxx
-2. then try ./ip2name xxx.xxx
+then try
+3. ./ip2name xxx.xxx
 
 You will need to get ip2asn-v4.tsv from iptoasn.com and place that file in the same directory as the scripts.  The xxxs are the first 2 or 3 octets of the ip address that you would like to ban that were identified using accessday above. Use the first 3 octets of the ip address and if nothing is reported then use the first 2 octets.
 
