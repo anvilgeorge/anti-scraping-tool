@@ -24,7 +24,9 @@ You may also have to change the first line of each file, #!/bin/sh, depending on
 **file: ad** (for accessday) 
 
 Usage: ./ad [-d days] [-o octets]
+
 days is the number of days prior, 0 - today, 1 - yesterday, 2 - the day before
+
 day Default: 0, i.e. today, if -d is not specfied
 
 Octets is the number of octets that are used to count requests. eg. all requests under xxx.yyy will be reported if 2 is specified for octets and xxx.yyy.zzz if 3 is specified.
