@@ -1,4 +1,4 @@
-Please read
+**Please read**
 
 Tools to prevent web scraping
 
@@ -20,7 +20,7 @@ The first 3 files are bsd command line shell scripts that are run in order:
 For the script files you will need to give them execute permission e.g. chmod 700 ad 
 You may also have to change the first line of each file, #!/bin/sh, depending on your set up.
 
-file: ad (for accessday) 
+**file: ad** (for accessday) 
 
 Usage: ./ad [-d days] [-o octets]
 days is the number of days prior, 0 - today, 1 - yesterday, 2 - the day before
@@ -42,7 +42,7 @@ It currently will search the last 500,000 entries of your access log. You can ch
 
 the xxx.xxx.xxx and yyy.yyy.yyy in the exclude variable are the 3 (can be 2 or 4 as well) octets of ip addresses you do not want reported, such as your own or a search crawler you do not want to block. You can delete and add more as needed, for example by adding "| zzz.zzz.zzz" to the line, before the end quote
 
-file: ip2r 
+**file: ip2r** 
 
 Usage: try the following on the command line:
 
@@ -64,7 +64,7 @@ The output reading across is:
     the country
     the registrant
 
-file: r2ip
+**file: r2ip**
 
 Usage: ./r2ip -v [-c country_code] registrant|asn
 
@@ -78,7 +78,7 @@ When the view flag is not selected, you will get the ips in CIDR format associat
 
 You will need perl and p5-Net-CIDR to run this script.
 
-file: pf.conf 
+**file: pf.conf** 
 
 You will need to then add those ip addresses to your system's packet filtering.
 
