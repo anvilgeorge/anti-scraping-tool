@@ -21,6 +21,8 @@ For the script files you will need to give them execute permission e.g. chmod 70
 
 You may also have to change the first line of each file, #!/bin/sh, depending on your set up.
 
+any references to xxx, yyy or zzz need to be replaced by an actual ip address octet  eg. replace 154 for xxx as appropriate.
+
 **file: ad** (for accessday) 
 
 Usage: ./ad [-d days] [-o octets]
@@ -30,6 +32,7 @@ days is the number of days prior, 0 - today, 1 - yesterday, 2 - the day before
 day default: 0, i.e. today, if -d is not specfied
 
 Octets is the number of octets that are used to count requests. eg. all requests under xxx.yyy will be reported if 2 is specified for octets and xxx.yyy.zzz if 3 is specified.
+
 Octets default: 3 octets, if -o is not specfied
 
 The script will search your http access log and pull all of the access requests for that day and provide the number of accesses for each ip address. 
@@ -43,7 +46,7 @@ The script assumes your http access log is located at /var/log/httpd-access.log.
 
 It currently will search the last 500,000 entries of your access log. You can change this as needed by changing the number in "lines=500000" at the top of the file
 
-the xxx.xxx.xxx and yyy.yyy.yyy in the exclude variable are the 3 (can be 2 or 4 as well) octets of ip addresses you do not want reported, such as your own or a search crawler you do not want to block. You can delete and add more as needed, for example by adding "| zzz.zzz.zzz" to the line, before the end quote
+the xxx.xxx.xxx and yyy.yyy.yyy in the exclude variable are the 3 (can be 2 or 4 as well) octets of ip addresses you do not want reported, such as your own or a search crawler you do not want to block. You can delete and add more as needed, for example by adding "| zzz.zzz.zzz" to the line, before the end quote.  (to be fixed: only filter by matching at the start of the ip address) 
 
 **file: ip2r** 
 
