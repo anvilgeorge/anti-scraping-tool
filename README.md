@@ -17,7 +17,8 @@ The first 3 files are bsd command line shell scripts that are run in order:
     r2ip - This will give you the other ips associated with the registrant
     I then update my packet filtering blocking system with all of the ip addresses associated with the registrant I want to ban.
 
-For the script files you will need to give them execute permission e.g. chmod 700 ad 
+For the script files you will need to give them execute permission e.g. chmod 700 ad
+
 You may also have to change the first line of each file, #!/bin/sh, depending on your set up.
 
 **file: ad** (for accessday) 
