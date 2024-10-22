@@ -1,0 +1,9 @@
+#!/bin/sh
+# copyright (c) anvilgeorge 2024
+
+# Usage: ./ip2r xxx.xxx.xxx
+# Octets: can specify 2 or 3 octets of the ip address you are interested in
+#  1 or 4 octets are not likely to be helpful
+
+grep ^$1 ip2asn-v4.tsv
+exit 0
