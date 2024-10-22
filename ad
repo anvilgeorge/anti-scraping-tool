@@ -1,0 +1,52 @@
+#!/bin/sh
+# copyright (c) anvilgeorge 2024
+
+# Usage: ./ad [-d days] [-o octets]
+# Days is the number of days prior, 0 - today, 1 - yesterday, 2 - the day before
+# Day Default: 0, ie today, if -d is not specfied
+# Octets is the number of octets that are used to count request. eg. all requests under xxx.yyy will be reported if 2 is specified for octets and xxx.yyy.zzz if 3 is specified
+# Octets default: 3 octets, if -o is not specfied
+
+# log_location is the location of the http access log
+log_location='/var/log/httpd-access.log'
+
+# lines: how many recent lines from the httpd access log are to be pulled
+# affects how many days you can go back and will depend on how busy the site is
+lines=500000
+
+# ip addressess tO be excluded from reporting, such as your own or a search indexer
+exclude='66.249.79|66.249.72|66.249.68|52.167.144|40.77|157.55.39|207.46.13|66.249.64|104.224.114'
+
+# no need to change below
+OPT_days=0
+VAL_days=0
+
+OPT_octets=0
+VAL_octets=0
+
+while getopts d:o: ARGS
+do
+   case ${ARGS} in
+   d)
+      OPT_days=1
+      VAL_days=${OPTARG}
+   ;;
+   o)
+      OPT_octets=1
+      VAL_octets=${OPTARG}
+   ;;
+   ?)
+      printf "Usage: %s [-d days] [-o octets] \n" $0
+      exit 2;;
+   esac
+done
+
+datetag=`date -v-${VAL_days}d "+%d/%b/%Y"`
+
+tail -n $lines $log_location | grep $datetag \
+| grep -Ev $exclude \
+| awk '{print $1}' \
+| awk -F'.' '{print $1 " "  $2  " " $3  " " $4}' \
+| awk -v octets=$VAL_octets '{if (octets==1) { print $1 } else if (octets==2) { print $1 "." $2 } else if (octets==3) { print $1 "." $2 "." $3 } else if (octets==4) { print $1 "." $2 "." $3 "." $4 } else { print $1 "." $2 "." $3 } }' \
+| sed s/' '/\\n/g | sort | uniq -c | sort -n
+exit 0
