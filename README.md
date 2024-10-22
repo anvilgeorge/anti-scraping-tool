@@ -21,7 +21,7 @@ For the script files you will need to give them execute permission e.g. chmod 70
 
 You may also have to change the first line of each file, #!/bin/sh, depending on your set up.
 
-any references to xxx, yyy or zzz need to be replaced by an actual ip address octet  eg. replace 154.232.12 for xxx.yyy.zzz as appropriate.
+any references to xxx, yyy or zzz need to be replaced by an actual ip address octet  eg. replace xxx.yyy.zzz by 154.232.12 as appropriate.
 
 **file: ad** (for accessday) 
 
