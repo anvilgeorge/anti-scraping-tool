@@ -102,4 +102,8 @@ I also added the following to pf.conf in the appropriate spots
 
 	block drop in quick on $ext_if inet from { <blocked_ips> } to any
 
+ You will need to restart the packet filter after adding ips to be blocked.
+
+ 	eg. service pf restart
+
 This assumes you are running the pf packet filter on your system.
