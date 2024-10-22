@@ -27,7 +27,7 @@ Usage: ./ad [-d days] [-o octets]
 
 days is the number of days prior, 0 - today, 1 - yesterday, 2 - the day before
 
-day Default: 0, i.e. today, if -d is not specfied
+day default: 0, i.e. today, if -d is not specfied
 
 Octets is the number of octets that are used to count requests. eg. all requests under xxx.yyy will be reported if 2 is specified for octets and xxx.yyy.zzz if 3 is specified.
 Octets default: 3 octets, if -o is not specfied
@@ -37,7 +37,7 @@ The script will search your http access log and pull all of the access requests 
 The output reading across is:
 
 	- the number of requests 
-	- the set of octets of the ip addresses associated with the requests.
+	- the first set of octets of the ip addresses associated with the requests.
 
 The script assumes your http access log is located at /var/log/httpd-access.log. You may need to change that based on your setup. This can be changed by changing log_location='/var/log/httpd-access.log' at the top of the file.  Ensure you have read access to this file.
 
