@@ -57,7 +57,7 @@ then try
 
 You will need to get ip2asn-v4.tsv from iptoasn.com - I used gunzip to unzip the file - tar did not seem to work
 
-Place that file in the same directory as the scripts. The xxxs are the first 2 or 3 octets of the ip address that you would like to ban that were identified using ad above. Use the first 3 octets of the ip address and if nothing is reported then use the first 2 octets.  As well, if nothing is reported for 2 octets, then walk back the lst octet.  eg. try ./ip2r xxx.104 then ./ip2r xxx.103 then ./ip2r xxx.102 etc  
+Place that file in the same directory as the scripts. The xxxs are the first 2 or 3 octets of the ip address that you would like to ban that were identified using ad above. Use the first 3 octets of the ip address and if nothing is reported then use the first 2 octets.  As well, if nothing is reported for 2 octets, then walk back the last octet.  eg. try ./ip2r xxx.104 then ./ip2r xxx.103 then ./ip2r xxx.102 etc  
 
 for example xxx.104 might be in the range of xxx.102.0.0 to xxx.105.255.255
 
