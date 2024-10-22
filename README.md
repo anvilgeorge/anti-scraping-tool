@@ -46,7 +46,7 @@ the xxx.xxx.xxx and yyy.yyy.yyy in the exclude variable are the 3 (can be 2 or 4
 
 Usage: try the following on the command line:
 
-./ip2registrant xxx.yyy.zzz
+./ip2r xxx.yyy.zzz
 
 then try
 
