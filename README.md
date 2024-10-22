@@ -21,7 +21,7 @@ For the script files you will need to give them execute permission e.g. chmod 70
 
 You may also have to change the first line of each file, #!/bin/sh, depending on your set up.
 
-any references to xxx, yyy or zzz need to be replaced by an actual ip address octet  eg. replace 154 for xxx as appropriate.
+any references to xxx, yyy or zzz need to be replaced by an actual ip address octet  eg. replace 154.232.12 for xxx.yyy.zzz as appropriate.
 
 **file: ad** (for accessday) 
 
@@ -31,7 +31,7 @@ days is the number of days prior, 0 - today, 1 - yesterday, 2 - the day before
 
 day default: 0, i.e. today, if -d is not specfied
 
-Octets is the number of octets that are used to count requests. eg. all requests under xxx.yyy will be reported if 2 is specified for octets and xxx.yyy.zzz if 3 is specified.
+Octets is the number of octets that are used to count requests. eg. all requests under xxx.yyy will be reported if 2 is specified for octets and xxx.yyy.zzz if 3 is specified.  Some scrappers will use multiple ip addresses with the same first 2 octets to avoid detection and that is where reporting based on the first 2 octets can be helpful.
 
 Octets default: 3 octets, if -o is not specfied
 
