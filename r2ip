@@ -1,0 +1,57 @@
+#!/bin/sh
+# copyright (c) anvilgeorge 2024
+
+# Usage: ./r2ips -v [-c country_code] registrant|asn
+
+# Country: a 2 letter country code can be specified to narrow ip catchment
+# Country default: all countries if -c is not specfied
+# View: -v is to enable viewing of the output.
+# View default: creates file with list of ip addresses in CIDR format if -v not specified
+# Registrant|asn: the registrant's name or an asn number, without the 'ASN', can be specified
+
+# no need to change below
+OPT_country=0
+VAL_country=""
+OPT_view=0
+
+while getopts c:v ARGS
+do
+   case ${ARGS} in
+   c)
+      OPT_country=1
+      VAL_country=${OPTARG}
+   ;;
+   v)
+      OPT_view=1
+   ;;
+   ?)
+      printf "Usage: %s [-v] [-c country] registrant|asn \n" $0
+      exit 2;;
+   esac
+done
+
+shift $(( $OPTIND -1 ))
+
+if [ $# = 0 ]; then
+      printf "Usage: %s [-v] [-c country] registrant|ans \n" $0
+      exit 1
+fi
+
+if [ "$OPT_view" == "0" ] ; then
+   if [ "$OPT_country" == "0" ] ; then
+      grep -i $'\t'$@ ip2asn-v4.tsv | awk '{print $1 " - " $2}' | sort -n \
+      | perl -MNet::CIDR=range2cidr -lne 'print for range2cidr $_' > ASN-$@
+      cat ASN-$@
+   else
+      grep -i $'\t'$@ ip2asn-v4.tsv | grep -i $'\t'${VAL_country}$'\t' | awk '{print $1 " - " $2}' | sort -n \
+      | perl -MNet::CIDR=range2cidr -lne 'print for range2cidr $_' > ASN-${VAL_country}-$@
+      cat ASN-${VAL_country}-$@
+   fi
+else
+   if [ "$OPT_country" == "0" ] ; then
+      grep -i $'\t'$@ ip2asn-v4.tsv | sort -k 4,4 -k 5,5 -k 3,3 -k 1,1
+   else
+      grep -i $'\t'$@ ip2asn-v4.tsv | grep -i $'\t'$VAL_country$'\t' | sort -k 5,5 -k 3,3 -k 1,1
+   fi
+fi
+exit 0
