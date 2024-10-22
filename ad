@@ -15,7 +15,7 @@ log_location='/var/log/httpd-access.log'
 lines=500000
 
 # ip addressess tO be excluded from reporting, such as your own or a search indexer
-exclude='66.249.79|66.249.72|66.249.68|52.167.144|40.77|157.55.39|207.46.13|66.249.64|104.224.114'
+exclude='xxx.yyy.zzz|aaa.bbb.ccc.ddd|eee.fff'
 
 # no need to change below
 OPT_days=0
