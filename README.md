@@ -64,6 +64,10 @@ Place that file in the same directory as the scripts. The xxxs are the first 2 o
 
 for example xxx.104 might be in the range of xxx.102.0.0 to xxx.105.255.255
 
+If you search on the first 2 octets and get multiple responses you will need to review the list of responses to see where your 3 octets fit in to find the registrant.
+
+for example, if you search xxx.104 and your 3 octets is xxx.104.234 that would correspond to the range of xxx.104.230.0 to xxx.104.235.255 in the list.
+
 The output reading across is:
 
     start of the ip adress block
