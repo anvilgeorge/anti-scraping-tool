@@ -46,7 +46,7 @@ The script assumes your http access log is located at /var/log/httpd-access.log.
 
 It currently will search the last 500,000 entries of your access log. You can change this as needed by changing the number in "lines=500000" at the top of the file
 
-the xxx.xxx.xxx and yyy.yyy.yyy in the exclude variable are the 3 (can be 2 or 4 as well) octets of ip addresses you do not want reported, such as your own or a search crawler you do not want to block. You can delete and add more as needed, for example by adding "| zzz.zzz.zzz" to the line, before the end quote.  (to be fixed: only filter by matching at the start of the ip address) 
+the ^xxx.xxx.xxx and ^yyy.yyy.yyy in the exclude variable are the first 3 (can be 2 or 4 as well) octets of ip addresses you do not want reported, such as your own or a search crawler you do not want to block. You can delete and add more as needed, for example by adding "|^zzz.zzz.zzz" to the line, before the end quote.   
 
 **file: ip2r** 
 
