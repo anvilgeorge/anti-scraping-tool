@@ -66,7 +66,7 @@ for example xxx.104 might be in the range of xxx.102.0.0 to xxx.105.255.255
 
 If you search on the first 2 octets and get multiple responses you will need to review the list of responses to see where your 3 octets fit in to find the registrant.
 
-for example, if you search xxx.104 and your 3 octets is xxx.104.234 that would correspond to the range of xxx.104.230.0 to xxx.104.235.255 in the list.
+for example, if you search xxx.104 and your 3 octets is xxx.104.234 that could correspond to the range of xxx.104.230.0 to xxx.104.235.255 in the list.  Then identify the registrant that corresponds to the range.
 
 The output reading across is:
 
@@ -78,19 +78,19 @@ The output reading across is:
 
 **file: r2ip**
 
-Usage: ./r2ip -v [-c country_code] registrant|asn
+Usage: ./r2ip [-v] [-c country_code] registrant|asn
 
 Country: a 2 letter country code can be specified to narrow the search. Sometimes registrants have similar names.
 
 Country default: all countries if -c is not specified
 
-View: -v is to enable viewing of the output.  Note that the output is not in CIDR format and cannot be used in the pf packet filter.  This takes less processing when the CIDR output is not specified.
+View: -v is to enable viewing of the output.  Note that the output is not in CIDR format and cannot be used in the pf packet filter.  This takes less processing when the CIDR output is not produced.
 
 View default: creates file with list of ip addresses in CIDR format if -v not specified
 
 Registrant|asn: the registrant's name or an asn number, without a leading 'ASN', can be specified.  For the registrant, it not case sensitive.  It will capture both XYZ and xyz.  As well, searches are from the start of the registrant's name.  A search for xyz will not catch ab-xyz.
 
-When the view flag is not selected, you will get the ips in CIDR format associated with the registrant or asn.  It will also create a file ASN-registrant or ASN-number with the ip addresses in CIDR format.  If the country code is selected then the file name will include the country code in the form of ASN-CC-registrant, where CC is the country code.
+When the view flag is not selected, you will get the ips in CIDR format associated with the registrant or asn.  As well, when the view flag is not selected, the script  will create a file ASN-registrant or ASN-number with the ip addresses in CIDR format.  If the country code is selected then the file name will include the country code in the form of ASN-CC-registrant, where CC is the country code.
 
 You will need perl and p5-Net-CIDR to run this script.
 
