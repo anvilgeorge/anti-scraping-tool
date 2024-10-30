@@ -8,7 +8,7 @@ This is not meant to be a plug and play tool. You will need to adapt it for your
 
 requirements: perl and p5-Net-CIDR as well as a copy of ip2asn-v4.tsv 
 
-my environment: freebsd 13.2, apache 2.4, pf packet filter, perl and sh shell
+my environment: freebsd 13.2, apache 2.4, pf packet filter, perl and bourne shell
 
 The first 3 files are bsd command line shell scripts that are run in order:
 
