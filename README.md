@@ -88,7 +88,7 @@ View: -v is to enable viewing of the output.  Note that the output is not in CID
 
 View default: creates file with list of ip addresses in CIDR format if -v not specified
 
-Registrant|asn: the registrant's name or an asn number, without a leading 'ASN', can be specified.  For the registrant, it not case sensitive.  It will capture both XYZ and xyz.  As well, searches are from the start of the registrant's name.  A search for xyz will not catch ab-xyz.
+Registrant|asn: the registrant's name or an asn number, without a leading 'ASN', can be specified.  For the registrant, it is not case sensitive.  It will capture both XYZ and xyz.  As well, searches are from the start of the registrant's name.  A search for xyz will not catch ab-xyz.
 
 When the view flag is not selected, you will get the ips in CIDR format associated with the registrant or asn.  As well, when the view flag is not selected, the script  will create a file ASN-registrant or ASN-number with the ip addresses in CIDR format.  If the country code is selected then the file name will include the country code in the form of ASN-CC-registrant, where CC is the country code.
 
