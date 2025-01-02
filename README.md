@@ -45,7 +45,7 @@ The output reading across is:
 	- the number of requests 
 	- the first set of octets of the ip addresses associated with the requests.
 
-The script assumes your http access log is located at /var/log/httpd-access.log. You may need to change that based on your setup. This can be changed by changing log_location='/var/log/httpd-access.log' at the top of the file.  Ensure you have read access to this file.
+The script assumes your httpd access log is located at /var/log/httpd-access.log. You may need to change that based on your setup. This can be changed by changing log_location='/var/log/httpd-access.log' at the top of the file.  Ensure you have read access to this file.
 
 It currently will search the last 500,000 entries of your access log. You can change this as needed by changing the number in "lines=500000" at the top of the file
 
