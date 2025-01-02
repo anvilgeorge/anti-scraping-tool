@@ -1,5 +1,8 @@
 **Please read**
 
+Revisions since most recent release:
+ - Jan 2, 2025 - see packet filtering near the bottom of the file
+
 Tools to prevent web scraping
 
 The tools first identify the ip address of the party you would like to ban, ie. an ip address that is making a significant number of web requests. It then provides all of the ip addresses associated with that party. Those addresses are then added to the packet filter and blocked.
@@ -106,6 +109,11 @@ I also added the following to pf.conf in the appropriate spots
 
 	block drop in quick on $ext_if inet from { <blocked_ips> } to any
 
+	
+EDIT Jan 2/25: If you are providing other services, such as named or mail, then you may want to restrict your packet filtering instead, e.g. 
+ 	
+  	block drop in quick on $ext_if inet proto tcp from { <blocked_ips> } to any port {8080, 80, 443}
+ 
  You will need to restart the packet filter after adding ips to be blocked.
 
  	eg. service pf restart
