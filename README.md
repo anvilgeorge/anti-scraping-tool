@@ -38,7 +38,7 @@ Octets is the number of octets that are used to count requests. eg. all requests
 
 Octets default: 3 octets, if -o is not specfied
 
-The script will search your http access log and pull all of the access requests for that day and provide the number of accesses for each ip address. 
+The script will search your httpd access log and pull all of the access requests for that day and provide the number of accesses for each ip address. 
 
 The output reading across is:
 
