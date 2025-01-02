@@ -1,6 +1,6 @@
 **Please read**
 
-Revisions since most recent release:
+Substantive revisions since most recent release:
  - Jan 2, 2025 - see packet filtering near the bottom of the file
 
 Tools to prevent web scraping
@@ -101,8 +101,11 @@ You will need perl and p5-Net-CIDR to run this script.
 
 You will need to then add those ip addresses to your system's packet filtering.
 
-I created /etc/blocked_ips for this purpose.  I add the ip addresses in CIDR format to this file
+I created /etc/blocked_ips for this purpose.  I add the ip addresses in CIDR format to this file.  I first add a line to identify the registrant and then I add the ip addresses after that line so I can find the registrant's ip addresses if I wish to remove them later on.
 
+	# regitratant-name
+ 	www.xxx.yyy.zzz/15
+ 
 I also added the following to pf.conf in the appropriate spots
 
 	table <blocked_ips> persist file "/etc/blocked_ips"
