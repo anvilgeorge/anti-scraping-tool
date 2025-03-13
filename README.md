@@ -1,7 +1,7 @@
 **Please read**
 
 Substantive revisions since most recent release:
- - Jan 2, 2025 - see packet filtering near the bottom of the file
+ - Jan 2, 2025 - see packet filtering near the bottom of this file
 
 Tools to prevent web scraping
 
