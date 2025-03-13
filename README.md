@@ -41,7 +41,7 @@ day default: 0, i.e. today, if -d is not specfied
 
 Octets is the number of octets that are used to count requests. eg. all requests under xxx.yyy will be reported if 2 is specified for octets and xxx.yyy.zzz if 3 is specified.  Some scrappers will use multiple ip addresses with the same first 2 octets to avoid detection and that is where reporting based on the first 2 octets can be helpful.  
 
-You will generally need the 3 octets of an ip address in order to properly identify the registrant using the scripts that follow.  2 octets are only helpful to identify scrapers that are using multiple ip addresses with different 3 octets but share to same leading 2 octets. If you identify a 2 octet ip address of interest, then rerun the script with 3 octets and identify a 3 octet ip address with the same 2 leadihng octets that are of interest.  Use that 3 octet ip address to then identify the registrant with the other scripts as described below.
+You will generally need the 3 octets of an ip address in order to properly identify the registrant using the scripts that follow.  2 octets are only helpful to identify scrapers that are using multiple ip addresses with different 3 octets but share to same leading 2 octets. If you identify a 2 octet ip address of interest, then rerun the script for 3 octets and identify a 3 octet ip address with the same 2 leading octets that are of interest.  Use that 3 octet ip address to then identify the registrant with the other scripts as described below.
 
 Octets default: 3 octets, if -o is not specfied
 
