@@ -1,5 +1,7 @@
 **Please read**
 
+This file has been revised a fair bit for clarification since the most recent release.  If you are having difficulties then use this readme rather than the one in the release.
+
 Substantive revisions since most recent release:
  - Jan 2, 2025 - see packet filtering near the bottom of this file
 
@@ -30,13 +32,16 @@ any references to xxx, yyy or zzz need to be replaced by an actual ip address oc
 
 Usage: ./ad [-d days] [-o octets]
 
+eg: ./ad -d 1 -o 2
+- report for 2 octets for yesterday
+
 days is the number of days prior, 0 - today, 1 - yesterday, 2 - the day before
 
 day default: 0, i.e. today, if -d is not specfied
 
 Octets is the number of octets that are used to count requests. eg. all requests under xxx.yyy will be reported if 2 is specified for octets and xxx.yyy.zzz if 3 is specified.  Some scrappers will use multiple ip addresses with the same first 2 octets to avoid detection and that is where reporting based on the first 2 octets can be helpful.  
 
-You will generally need the 3 octets of an ip address in order to properly identify the registrant using the scripts that follow.  2 octets are only helpful to identify scrapers that are using multiple ip addresses with different 3 octets but share to same leading 2 octets. If you identify a 2 octet ip address of interest, then rerun the script with 3 octets and identify a 3 octet ip address with the same leading 2 octets.  Use that 3 octet ip address to then identify the registrant with the following scripts.
+You will generally need the 3 octets of an ip address in order to properly identify the registrant using the scripts that follow.  2 octets are only helpful to identify scrapers that are using multiple ip addresses with different 3 octets but share to same leading 2 octets. If you identify a 2 octet ip address of interest, then rerun the script with 3 octets and identify a 3 octet ip address with the same 2 leadihng octets that are of interest.  Use that 3 octet ip address to then identify the registrant with the other scripts as described below.
 
 Octets default: 3 octets, if -o is not specfied
 
@@ -49,13 +54,13 @@ The output reading across is:
 
 The script assumes your httpd access log is located at /var/log/httpd-access.log. You may need to change that based on your setup. This can be changed by changing log_location='/var/log/httpd-access.log' at the top of the file.  Ensure you have read access to this file.
 
-It currently will search the last 500,000 entries of your access log. You can change this as needed by changing the number in "lines=500000" at the top of the file
+It currently will search the last 500,000 entries of your access log. You can change this as needed by changing the number in "lines=500000" at the top of the file.  This number affects how many days you can go back and will depend on how busy the site is. 
 
 the ^xxx.xxx.xxx and ^yyy.yyy.yyy in the exclude variable are the first 3 (can be 2 or 4 as well) octets of ip addresses you do not want reported, such as your own or a search crawler you do not want to block. You can delete and add more as needed, for example by adding "|^zzz.zzz.zzz" to the line, before the end quote.   
 
 **file: ip2r** 
 
-Usage: try the following on the command line:
+Usage: try the following on the command line (replacing xxx.yyy.zzz with an actual 3 octet ip address as identified above):
 
 ./ip2r xxx.yyy.zzz
 
@@ -63,9 +68,9 @@ then try
 
 ./ip2r xxx.yyy
 
-You will need to get ip2asn-v4.tsv from iptoasn.com - I used gunzip to unzip the file - tar did not seem to work.  This file should be updated regularly.  If you are getting a "Not routed" as the registrant it means this file is likely out of date.  If you are now getting a registrant that you previously banned, then it is likely that they have aquired new ip addresses since you banned them.  You will need to rerun the tool and replace their ip addresses in your packet filter.
+You will need to get ip2asn-v4.tsv from iptoasn.com - I used gunzip to unzip the file - tar did not seem to work.  ip2asn-v4.tsv should be updated regularly.  If you are getting a "Not routed" as the registrant it means this file is likely out of date.  If you are now getting a registrant that you previously banned, then likely the registrant aquired new ip addresses since you banned them.  You will need to rerun this tool and replace their ip addresses in your packet filter.
 
-Place that file in the same directory as the scripts. The xxxs are the first 2 or 3 octets of the ip address that you would like to ban that were identified using ad above. Use the first 3 octets of the ip address and if nothing is reported then use the first 2 octets.  As well, if nothing is reported for 2 octets, then walk back the last octet.  eg. try ./ip2r xxx.104 then ./ip2r xxx.103 then ./ip2r xxx.102 etc  
+Place ip2asn-v4.tsv in the same directory as the scripts. The xxx.yyy.zzz in the command line command are the first 2 or 3 octets of the ip address that you would like to ban that were identified using ad above. Use the first 3 octets of the ip address and if nothing is reported then use the first 2 octets.  As well, if nothing is reported for 2 octets, then walk back the last octet.  eg. try ./ip2r xxx.104 then ./ip2r xxx.103 then ./ip2r xxx.102 etc  
 
 for example xxx.104 might be in the range of xxx.102.0.0 to xxx.105.255.255
 
@@ -93,9 +98,9 @@ View: -v is to enable viewing of the output.  Note that the output is not in CID
 
 View default: creates file with list of ip addresses in CIDR format if -v not specified
 
-Registrant|asn: the registrant's name or an asn number, without a leading 'ASN', can be specified.  For the registrant, it is not case sensitive.  It will capture both XYZ and xyz.  As well, searches are from the start of the registrant's name.  A search for xyz will not catch ab-xyz.
+Registrant|asn: the registrant's name or an asn number, without a leading 'ASN', can be specified.  For the registrant, it is not case sensitive.  It will capture both XYZ and xyz.  As well, searches are from the start of the registrant's name.  A search for xyz will not catch ab-xyz but will catch xyz-ab
 
-When the view flag is not selected, you will get the ips in CIDR format associated with the registrant or asn.  As well, when the view flag is not selected, the script  will create a file ASN-registrant or ASN-number with the ip addresses in CIDR format.  If the country code is selected then the file name will include the country code in the form of ASN-CC-registrant, where CC is the country code.
+When the view flag is not selected, you will get the ips in CIDR format associated with the registrant or asn.  As well, when the view flag is not selected, the script will create a file ASN-registrant or ASN-number with the ip addresses in CIDR format.  If the country code is selected then the file name will include the country code in the form of ASN-CC-registrant, where CC is the country code.  The file is created in the same directory as the scripts. You will need write permission for the directory.
 
 You will need perl and p5-Net-CIDR to run this script.
 
