@@ -34,7 +34,9 @@ days is the number of days prior, 0 - today, 1 - yesterday, 2 - the day before
 
 day default: 0, i.e. today, if -d is not specfied
 
-Octets is the number of octets that are used to count requests. eg. all requests under xxx.yyy will be reported if 2 is specified for octets and xxx.yyy.zzz if 3 is specified.  Some scrappers will use multiple ip addresses with the same first 2 octets to avoid detection and that is where reporting based on the first 2 octets can be helpful.
+Octets is the number of octets that are used to count requests. eg. all requests under xxx.yyy will be reported if 2 is specified for octets and xxx.yyy.zzz if 3 is specified.  Some scrappers will use multiple ip addresses with the same first 2 octets to avoid detection and that is where reporting based on the first 2 octets can be helpful.  
+
+You will generally need the 3 octets of an ip address in order to properly identify the registrant using the scripts that follow.  2 octets are only helpful to identify scrapers that are using multiple ip addresses with different 3 octets but share to same leading 2 octets. If you identify a 2 octet ip address of interest, then rerun the script with 3 octets and identify a 3 octet ip address with the same leading 2 octets.  Use that 3 octet ip address to then identify the registrant with the following scripts.
 
 Octets default: 3 octets, if -o is not specfied
 
@@ -61,8 +63,7 @@ then try
 
 ./ip2r xxx.yyy
 
-You will need to get ip2asn-v4.tsv from iptoasn.com - I used gunzip to unzip the file - tar did not seem to work.
-*this file should be updated regularly.  If you are getting a "Not routed" as the registrant or if you are now getting a registrant that you previously banned, it means this file is likely out of date.
+You will need to get ip2asn-v4.tsv from iptoasn.com - I used gunzip to unzip the file - tar did not seem to work.  This file should be updated regularly.  If you are getting a "Not routed" as the registrant or if you are now getting a registrant that you previously banned, it means this file is likely out of date.
 
 Place that file in the same directory as the scripts. The xxxs are the first 2 or 3 octets of the ip address that you would like to ban that were identified using ad above. Use the first 3 octets of the ip address and if nothing is reported then use the first 2 octets.  As well, if nothing is reported for 2 octets, then walk back the last octet.  eg. try ./ip2r xxx.104 then ./ip2r xxx.103 then ./ip2r xxx.102 etc  
 
@@ -102,7 +103,7 @@ You will need perl and p5-Net-CIDR to run this script.
 
 You will need to then add those ip addresses to your system's packet filtering.
 
-I created /etc/blocked_ips for this purpose.  I add the ip addresses in CIDR format to this file.  I first add a line to identify the registrant and then I add the ip addresses after that line so I can find the registrant's ip addresses if I wish to remove them later on.
+I created /etc/blocked_ips for this purpose.  I add the ip addresses in CIDR format to this file.  I first add a line to identify the registrant and then I add the ip addresses after that line so I can find the registrant's ip addresses if I wish to remove or replace them later on.
 
 	# regitratant-name
  	www.xxx.yyy.zzz/15
