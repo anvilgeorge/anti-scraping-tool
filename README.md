@@ -63,7 +63,7 @@ then try
 
 ./ip2r xxx.yyy
 
-You will need to get ip2asn-v4.tsv from iptoasn.com - I used gunzip to unzip the file - tar did not seem to work.  This file should be updated regularly.  If you are getting a "Not routed" as the registrant or if you are now getting a registrant that you previously banned, it means this file is likely out of date.
+You will need to get ip2asn-v4.tsv from iptoasn.com - I used gunzip to unzip the file - tar did not seem to work.  This file should be updated regularly.  If you are getting a "Not routed" as the registrant it means this file is likely out of date.  If you are now getting a registrant that you previously banned, then it is likely that they have aquired new ip addresses since you banned them.  You will need to rerun the tool and replace their ip addresses in your packet filter.
 
 Place that file in the same directory as the scripts. The xxxs are the first 2 or 3 octets of the ip address that you would like to ban that were identified using ad above. Use the first 3 octets of the ip address and if nothing is reported then use the first 2 octets.  As well, if nothing is reported for 2 octets, then walk back the last octet.  eg. try ./ip2r xxx.104 then ./ip2r xxx.103 then ./ip2r xxx.102 etc  
 
